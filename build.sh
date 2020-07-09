@@ -59,7 +59,7 @@ __main__()
 		return 1
 	fi
 
-	local GENERATOR_PARAMS="$(cmake_generator_params "$TARGET")"
+	eval "local GENERATOR_PARAMS=($(cmake_generator_params "$TARGET"))"
 
 	local BUILD_SHARED_LIBS="$(cmake_build_type "$TYPE")"
 	if [[ $BUILD_SHARED_LIBS -lt 0 ]]; then
@@ -81,7 +81,7 @@ __main__()
 		-DOPUS_FLOAT_APPROX=ON \
 		-DOPUS_INSTALL_PKG_CONFIG_MODULE=OFF \
 		-DOPUS_INSTALL_CMAKE_CONFIG_MODULE=OFF \
-		$GENERATOR_PARAMS
+		"${GENERATOR_PARAMS[@]}"
 	cmake --build . --target install --config Release
 	popd >/dev/null
 }
@@ -120,13 +120,13 @@ cmake_generator_params()
 {
 	case "$1" in
 		"ios")
-			echo "-G Xcode -DIOS_DEPLOYMENT_SDK_VERSION=10.0"
+			echo '-G Xcode -DIOS_DEPLOYMENT_SDK_VERSION=10.0'
 			;;
 		"macos")
-			echo "-G Xcode"
+			echo '-G Xcode'
 			;;
 		"win64")
-			echo "-G \"Visual Studio 14 2015\""
+			echo '-G "Visual Studio 14 2015"'
 			;;
 	esac
 }
