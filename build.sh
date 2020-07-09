@@ -68,7 +68,7 @@ __main__()
 	if [[ "$TARGET" == "ios" ]]; then
 		export XCODE_XCCONFIG_FILE="$SCRIPT_DIR/polly/scripts/NoCodeSign.xcconfig"
 	fi
-	cmake -S "$SCRIPT_DIR/libopus" -B "$BUILD_DIR" \
+	cmake -B "$BUILD_DIR" "$SCRIPT_DIR/libopus" \
 		-DCMAKE_TOOLCHAIN_FILE="$TOOLCHAIN" \
 		-DCMAKE_INSTALL_PREFIX="$OUTDIR" \
 		-DCMAKE_BUILD_TYPE="$CONF" \
@@ -121,7 +121,7 @@ cmake_generator_params()
 			echo "-GXcode"
 			;;
 		"win64")
-			echo "-G'Visual Studio 15 2017"
+			echo "'-GVisual Studio 15 2017'"
 			;;
 	esac
 }
