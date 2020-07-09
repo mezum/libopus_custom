@@ -44,7 +44,7 @@ __main__()
 
 	local TARGET="$1"
 	local TYPE="$2"
-	local OUTDIR="$3"
+	local OUTDIR="$PWD/$3"
 	shift 3
 
 	local CONF="${OPUSBUILD_CONF:-MinSizeRel}"
