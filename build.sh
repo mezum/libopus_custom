@@ -126,7 +126,7 @@ cmake_generator_params()
 			echo '-G Xcode'
 			;;
 		"win64")
-			echo '-G "Visual Studio 14 2015 Win64"'
+			echo '-G "Visual Studio 15 2017 Win64"'
 			;;
 	esac
 }
