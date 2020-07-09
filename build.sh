@@ -48,7 +48,10 @@ __main__()
 	shift 3
 
 	local CONF="${OPUSBUILD_CONF:-MinSizeRel}"
-	local BUILD_DIR="${OPUSBUILD_BUILD_DIR:-build}"
+	local BUILD_DIR="${OPUSBUILD_BUILD_DIR:-}"
+	if [[ -z "$BUILD_DIR" ]]; then
+		BUILD_DIR="$PWD/build"
+	fi
 
 	local TOOLCHAIN="$(cmake_toolchain "$TARGET")"
 	if [[ ! -f "$TOOLCHAIN" ]]; then
