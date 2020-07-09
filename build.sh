@@ -31,7 +31,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
 
 __main__()
 {
-	set -ue
+	set -e
 	if [[ $# -eq 0 ]]; then
 		what "$0"
 		return 1
@@ -126,7 +126,7 @@ cmake_generator_params()
 			echo '-G Xcode'
 			;;
 		"win64")
-			echo '-G "Visual Studio 14 2015"'
+			echo '-G "Visual Studio 14 2015 Win64"'
 			;;
 	esac
 }
