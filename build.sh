@@ -71,7 +71,8 @@ __main__()
 	if [[ "$TARGET" == "ios" ]]; then
 		export XCODE_XCCONFIG_FILE="$SCRIPT_DIR/polly/scripts/NoCodeSign.xcconfig"
 	fi
-	cmake -B "$BUILD_DIR" "$SCRIPT_DIR/libopus" \
+	pushd "$BUILD_DIR" >/dev/null
+	cmake "$SCRIPT_DIR/libopus" \
 		-DCMAKE_TOOLCHAIN_FILE="$TOOLCHAIN" \
 		-DCMAKE_INSTALL_PREFIX="$OUTDIR" \
 		-DCMAKE_BUILD_TYPE="$CONF" \
@@ -81,7 +82,8 @@ __main__()
 		-DOPUS_INSTALL_PKG_CONFIG_MODULE=OFF \
 		-DOPUS_INSTALL_CMAKE_CONFIG_MODULE=OFF \
 		$GENERATOR_PARAMS
-	cmake --build "$BUILD_DIR" --target install --config Release
+	cmake --build . --target install --config Release
+	popd >/dev/null
 }
 
 cmake_toolchain()
