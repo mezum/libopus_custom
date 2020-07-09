@@ -34,8 +34,8 @@ before_script:
 
 script:
   - rm -rf lib_static lib_shared
-  - bash ./build.sh $TARGET static lib_static
-  - bash ./build.sh $TARGET shared lib_shared
+  - OPUSBUILD_BUILD_DIR=build_static bash ./build.sh $TARGET static lib_static
+  - OPUSBUILD_BUILD_DIR=build_shared bash ./build.sh $TARGET shared lib_shared
 
 before_deploy:
   - mkdir -p "binaries-${TARGET}-${TRAVIS_TAG}"

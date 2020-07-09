@@ -6,6 +6,7 @@
 # @(#)Build the libopus with opus_custom options.
 # @(#)Usage:
 # @(#)    [OPUSBUILD_CONF=CONF] \\
+# @(#)    [OPUSBUILD_BUILD_DIR=BUILD_DIR]
 # @(#)        bash build.sh TARGET TYPE OUTDIR
 # @(#)Parameters:
 # @(#)    TARGET: A target platform.
@@ -24,6 +25,7 @@
 # @(#)        Release
 # @(#)        MinSizeRel       (default)
 # @(#)        RelWithDebInfo
+# @(#)    BUILD_DIR: A directory path that is used to place intermediate files.
 
 SCRIPT_DIR="$(cd "$(dirname "$0")"; pwd)"
 
@@ -46,6 +48,7 @@ __main__()
 	shift 3
 
 	local CONF="${OPUSBUILD_CONF:-MinSizeRel}"
+	local BUILD_DIR="${OPUSBUILD_BUILD_DIR:-build}"
 
 	local TOOLCHAIN="$(cmake_toolchain "$TARGET")"
 	if [[ ! -f "$TOOLCHAIN" ]]; then
@@ -61,11 +64,11 @@ __main__()
 		return 1
 	fi
 
-	mkdir -p "build"
+	mkdir -p "$BUILD_DIR"
 	if [[ "$TARGET" == "ios" ]]; then
 		export XCODE_XCCONFIG_FILE="$SCRIPT_DIR/polly/scripts/NoCodeSign.xcconfig"
 	fi
-	cmake -S "$SCRIPT_DIR/libopus" -B "build" \
+	cmake -S "$SCRIPT_DIR/libopus" -B "$BUILD_DIR" \
 		-DCMAKE_TOOLCHAIN_FILE="$TOOLCHAIN" \
 		-DCMAKE_INSTALL_PREFIX="$OUTDIR" \
 		-DCMAKE_BUILD_TYPE="$CONF" \
@@ -75,7 +78,7 @@ __main__()
 		-DOPUS_INSTALL_PKG_CONFIG_MODULE=OFF \
 		-DOPUS_INSTALL_CMAKE_CONFIG_MODULE=OFF \
 		$GENERATOR_PARAMS
-	cmake --build "build" --target install --config Release
+	cmake --build "$BUILD_DIR" --target install --config Release
 }
 
 cmake_toolchain()
