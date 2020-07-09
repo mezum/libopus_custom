@@ -120,13 +120,13 @@ cmake_generator_params()
 {
 	case "$1" in
 		"ios")
-			echo "-GXcode -DIOS_DEPLOYMENT_SDK_VERSION=10.0"
+			echo "-G Xcode -DIOS_DEPLOYMENT_SDK_VERSION=10.0"
 			;;
 		"macos")
-			echo "-GXcode"
+			echo "-G Xcode"
 			;;
 		"win64")
-			echo "'-GVisual Studio 15 2017'"
+			echo "-G 'Visual Studio 14 2015'"
 			;;
 	esac
 }
