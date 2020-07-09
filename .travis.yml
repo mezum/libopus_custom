@@ -54,7 +54,8 @@ before_deploy:
 
 deploy:
   provider: releases
-  api_key: $GITHUB_OAUTH_TOKEN
+  api_key:
+    secure: $GITHUB_OAUTH_TOKEN
   file: binaries-${TARGET}-${TRAVIS_TAG}.zip
   skip_cleanup: true
   on:
