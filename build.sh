@@ -108,7 +108,7 @@ cmake_toolchain()
 			echo "$SCRIPT_DIR/polly/xcode.cmake"
 			;;
 		"win64")
-			echo "$SCRIPT_DIR/polly/vs-14-2015-win64.cmake"
+			echo "$SCRIPT_DIR/polly/vs-15-2017-win64.cmake"
 			;;
 		*)
 			echo "SCRIPT_DIR/polly/$1"
